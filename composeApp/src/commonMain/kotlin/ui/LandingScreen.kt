@@ -67,7 +67,7 @@ fun LandingScreen(
             ) {
                 Spacer(modifier = Modifier.height(64.dp))
                 Text(
-                    modifier = Modifier.padding(horizontal = 32.dp),
+                    modifier = Modifier.padding(horizontal = 32.dp).fillMaxWidth(),
                     text = "Check Daily Activity",
                     color = Color(0xFF5B67CA),
                     style = MaterialTheme.typography.h4,
