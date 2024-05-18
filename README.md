@@ -34,9 +34,11 @@ Welcome to the landing page of My Application.
 
 | Android | iOS | Desktop |
 |:---:|:---:|:---:|
-|<img width="398" alt="android_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/d10d82f7-9c03-4a30-95ff-20bd2cbb7943">|<img width="419" alt="iOS_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/d40f1471-22cf-4186-a9ad-7799526390e0">|<img width="627" alt="desktop_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/ee1ca4b0-4083-4aaf-a8cd-d3ebd28d6d77">|
+|<img width="398" alt="android_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/d10d82f7-9c03-4a30-95ff-20bd2cbb7943">|<img width="419" alt="iOS_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/d40f1471-22cf-4186-a9ad-7799526390e0">|<img width="627" alt="desktop_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/65a4b707-b4aa-4696-8343-639170f3b2d0">|
 
 
 | Web |
 |:---:|
-|<img width="1726" alt="web_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/30570fc8-5d9b-4092-ba38-7ccdbbcb2cc9">|
+|<img width="1728" alt="web_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/5329365d-1beb-43aa-8846-422b95dbf3bf">|
+
+
