@@ -1,5 +1,6 @@
-package ui
+package ui.landing
 
+import androidx.compose.runtime.Composable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +18,6 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,15 +29,17 @@ import checkdailyactivity.composeapp.generated.resources.Res
 import checkdailyactivity.composeapp.generated.resources.daily_activity_image
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-@Preview
-fun LandingScreen(
-    phone: Boolean = true
+fun LandingContent(
+    phone: Boolean = true,
+    onLogInClick : () -> Unit,
+    onSignUpClick: () -> Unit,
 ) {
+    
     val modifier: Modifier = if (phone) Modifier.fillMaxWidth() else Modifier.fillMaxWidth(0.4f)
+    
     Scaffold {
         Column(
             modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
@@ -87,7 +89,7 @@ fun LandingScreen(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(25),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF5B67CA)),
-                    onClick = {/* TODO */ },
+                    onClick = onLogInClick,
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 8.dp),
@@ -101,7 +103,7 @@ fun LandingScreen(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(25),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-                    onClick = {/* TODO */ },
+                    onClick = { onSignUpClick() },
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 8.dp),
