@@ -1,5 +1,5 @@
-package online.nsandroid.security.token
+package online.nsandroid.check_daily_activity.security.token
 
 interface TokenService {
-    fun generate(config: TokenConfig, vararg claim: TokenClaim): String
+    fun generate(config: TokenConfig, vararg tokenClaims: TokenClaim): String
 }

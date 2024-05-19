@@ -8,8 +8,8 @@ import online.nsandroid.check_daily_activity.getSecretInfo
 import online.nsandroid.check_daily_activity.security.hashing.HashingService
 import online.nsandroid.check_daily_activity.signIn
 import online.nsandroid.check_daily_activity.signUp
-import online.nsandroid.security.token.TokenConfig
-import online.nsandroid.security.token.TokenService
+import online.nsandroid.check_daily_activity.security.token.TokenConfig
+import online.nsandroid.check_daily_activity.security.token.TokenService
 
 fun Application.configureRouting(
     userDataSource: UserDataSource,
@@ -19,8 +19,8 @@ fun Application.configureRouting(
 ) {
     routing {
         signIn(hashingService, userDataSource, tokenService, tokenConfig)
-        signUp(hashingService, userDataSource)
-        authenticate()
+        signUp(hashingService, userDataSource, tokenService, tokenConfig)
+        authenticate(tokenService, tokenConfig)
         getSecretInfo()
     }
 }
