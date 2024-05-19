@@ -16,13 +16,15 @@ import online.nsandroid.check_daily_activity.data.user.User
 import online.nsandroid.check_daily_activity.data.user.UserDataSource
 import online.nsandroid.check_daily_activity.security.hashing.HashingService
 import online.nsandroid.check_daily_activity.security.hashing.SaltedHash
-import online.nsandroid.security.token.TokenClaim
-import online.nsandroid.security.token.TokenConfig
-import online.nsandroid.security.token.TokenService
+import online.nsandroid.check_daily_activity.security.token.TokenClaim
+import online.nsandroid.check_daily_activity.security.token.TokenConfig
+import online.nsandroid.check_daily_activity.security.token.TokenService
 
 fun Route.signUp(
     hashingService: HashingService,
-    userDataSource: UserDataSource
+    userDataSource: UserDataSource,
+    tokenService: TokenService,
+    tokenConfig: TokenConfig
 ) {
     post("signup") {
         val request = kotlin.runCatching { call.receiveNullable<AuthRequest>() }.getOrNull() ?: kotlin.run {
@@ -49,7 +51,24 @@ fun Route.signUp(
             call.respond(HttpStatusCode.Conflict)
             return@post
         }
-        call.respond(HttpStatusCode.OK)
+        val token = tokenService.generate(
+            config = tokenConfig,
+            TokenClaim(
+                name = "userId",
+                value = user.id.toString()
+            ),
+            TokenClaim(
+                name = "email",
+                value = user.email
+            )
+
+        )
+
+        call.respond(
+            status = HttpStatusCode.OK, message = AuthResponse(
+                token = token
+            )
+        )
     }
 }
 
@@ -105,10 +124,29 @@ fun Route.signIn(
     }
 }
 
-fun Route.authenticate() {
+fun Route.authenticate(tokenService: TokenService, tokenConfig: TokenConfig) {
     authenticate {
         get("authenticate") {
-            call.respond(HttpStatusCode.OK)
+            val principal = call.principal<JWTPrincipal>()
+            val email = principal?.getClaim("email", String::class)
+            val userId = principal?.getClaim("userId", String::class)
+            val token = tokenService.generate(
+                config = tokenConfig,
+                TokenClaim(
+                    name = "userId",
+                    value = userId.orEmpty()
+                ),
+                TokenClaim(
+                    name = "email",
+                    value = email.orEmpty()
+                )
+
+            )
+            call.respond(
+                status = HttpStatusCode.OK, message = AuthResponse(
+                    token = token
+                )
+            )
         }
     }
 }

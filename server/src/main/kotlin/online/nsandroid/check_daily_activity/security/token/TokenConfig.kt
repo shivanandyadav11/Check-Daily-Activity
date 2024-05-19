@@ -1,4 +1,4 @@
-package online.nsandroid.security.token
+package online.nsandroid.check_daily_activity.security.token
 
 data class TokenConfig(
     val issuer: String,

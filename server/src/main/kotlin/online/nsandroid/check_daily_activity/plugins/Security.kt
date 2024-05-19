@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
-import online.nsandroid.security.token.TokenConfig
+import online.nsandroid.check_daily_activity.security.token.TokenConfig
 
 fun Application.configureSecurity(config: TokenConfig) {
     authentication {
