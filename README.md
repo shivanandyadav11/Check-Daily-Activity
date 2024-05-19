@@ -125,7 +125,7 @@ The server will start on `http://localhost:5500`.
 
 **Response**:
 
-- `201 Created`: User successfully registered.
+- `200 OK`: User successfully registered and returns a JWT token.
 - `400 Bad Request`: Invalid request data.
 
 ### 2. Sign In
