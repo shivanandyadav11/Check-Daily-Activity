@@ -2,6 +2,7 @@ package ui.login
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.koin.compose.koinInject
 import ui.viewmodel.AuthViewModel
 
 @Composable
@@ -10,9 +11,7 @@ fun LoginScreen(
     onLogInButtonClick: (String, String) -> Unit,
     onSignUpTextClick: () -> Unit,
 ) {
-    val viewModel: AuthViewModel = viewModel<AuthViewModel> {
-        AuthViewModel("Yadav")
-    }
+    val viewModel: AuthViewModel = koinInject<AuthViewModel>()
     LoginContent(
         phone = phone,
         onLogInButtonClick = { email, password ->
