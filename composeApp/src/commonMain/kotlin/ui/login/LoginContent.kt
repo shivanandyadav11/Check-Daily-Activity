@@ -50,9 +50,10 @@ fun LoginContent(
     phone: Boolean = true,
     onLogInButtonClick: (String, String) -> Unit,
     onSignUpTextClick: () -> Unit,
+    userName: String,
 ) {
     val modifier: Modifier = if (phone) Modifier.fillMaxWidth() else Modifier.fillMaxWidth(0.4f)
-    var email by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf(userName) }
     var password by remember { mutableStateOf("") }
 
     Column(

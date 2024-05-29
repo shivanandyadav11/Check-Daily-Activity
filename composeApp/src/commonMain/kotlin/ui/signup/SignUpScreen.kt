@@ -14,7 +14,7 @@ fun SignUpScreen(
     SignUpContent(
         phone = phone,
         onCreateButtonClick = {
-            userNamme, mail, password -> {
+            _, _, _ -> run {
 
         }
         },
