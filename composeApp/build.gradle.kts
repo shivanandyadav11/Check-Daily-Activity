@@ -1,16 +1,15 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
+    js {
         moduleName = "composeApp"
         browser {
             commonWebpackConfig {
@@ -55,6 +54,8 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            implementation(libs.android.ktor.okhttp)
+            implementation(libs.android.ktor.client)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -69,10 +70,24 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.coroutine)
-           implementation(libs.navigation.compose)
+            implementation(libs.navigation.compose)
+            implementation(libs.ktor.core)
+            implementation(libs.ktor.json)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.content.negotiation)
+            implementation(libs.serialization.json)
+            implementation(libs.content.negotiation)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.ios.ktor.client)
+        }
+
+        jsMain.dependencies {
+            implementation(libs.js.ktor.client)
         }
     }
 }
@@ -95,6 +110,10 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/kotlinx-io.kotlin_module"
+            excludes += "META-INF/atomicfu.kotlin_module"
+            excludes += "META-INF/kotlinx-coroutines-io.kotlin_module"
+            excludes += "META-INF/kotlinx-coroutines-core.kotlin_module"
         }
     }
     buildTypes {

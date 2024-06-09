@@ -12,7 +12,7 @@ fun NavGraphBuilder.loginGraphDestination(
     LoginScreen(
         onLogInButtonClick = { _, _ ->
             // TODO review this again
-            navHostController.navigate(NavigationDestination.LoginDestination.route)
+           // navHostController.navigate(NavigationDestination.LoginDestination.route)
         },
         onSignUpTextClick =
         {
