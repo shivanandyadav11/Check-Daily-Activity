@@ -24,7 +24,7 @@ ktorCore = "2.1.3"
 serializationJson = "1.6.3"
 contentNegotiation = "2.1.3"
 cio = "2.3.11"
-cioJVM = "2.3.11"
+johnrengelman = "7.1.0"
 
 [libraries]
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -75,3 +75,4 @@ kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
+johnrengelman = { id = "com.github.johnrengelman.shadow", version.ref = "johnrengelman" }

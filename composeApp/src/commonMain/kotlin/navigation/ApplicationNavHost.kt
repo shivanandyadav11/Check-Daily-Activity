@@ -21,5 +21,8 @@ fun ApplicationNavHost(
         signUpDetailGraphDestination(
             navHostController = navController,
         )
+        homeGraphDestination(
+            navHostController = navController,
+        )
     }
 }

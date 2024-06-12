@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.ktor)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.johnrengelman)
     application
 }
 
@@ -33,4 +34,12 @@ dependencies {
     testImplementation(libs.ktor.server.tests)
     testImplementation(libs.kotlin.test.junit)
 
+}
+
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveClassifier.set("all")
+    mergeServiceFiles()
+    manifest {
+        attributes(mapOf("Main-Class" to "online.nsandroid.check_daily_activity.ApplicationKt"))
+    }
 }

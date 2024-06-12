@@ -1,0 +1,9 @@
+package model.remote
+
+import kotlinx.serialization.Serializable
+
+
+@Serializable
+data class AuthToken(
+    val token: String? = null
+)

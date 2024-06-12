@@ -9,15 +9,13 @@ fun NavGraphBuilder.loginGraphDestination(
     navHostController: NavHostController,
 ) {
     composable(NavigationDestination.LoginDestination.route) {
-    LoginScreen(
-        onLogInButtonClick = { _, _ ->
-            // TODO review this again
-           // navHostController.navigate(NavigationDestination.LoginDestination.route)
-        },
-        onSignUpTextClick =
-        {
-            navHostController.navigate(NavigationDestination.SignUpDestination.route)
-        },
-    )
+        LoginScreen(
+            onSuccessFullLogin = {
+                navHostController.navigate(NavigationDestination.HomeDestination.route)
+            },
+            onSignUpTextClick = {
+                navHostController.navigate(NavigationDestination.SignUpDestination.route)
+            },
+        )
     }
 }

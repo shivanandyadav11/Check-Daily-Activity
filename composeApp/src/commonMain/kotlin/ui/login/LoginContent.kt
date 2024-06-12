@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import checkdailyactivity.composeapp.generated.resources.Res
@@ -50,10 +52,11 @@ fun LoginContent(
     phone: Boolean = true,
     onLogInButtonClick: (String, String) -> Unit,
     onSignUpTextClick: () -> Unit,
-    userName: String,
+    userEmail: State<String>,
+    error: String? = null,
 ) {
     val modifier: Modifier = if (phone) Modifier.fillMaxWidth() else Modifier.fillMaxWidth(0.4f)
-    var email by remember { mutableStateOf(userName) }
+    var email by remember { mutableStateOf(userEmail.value) }
     var password by remember { mutableStateOf("") }
 
     Column(
@@ -138,6 +141,10 @@ fun LoginContent(
                 shape = RoundedCornerShape(24)
             ) {
                 Text(text = "Login", color = Color.White)
+            }
+            if (error?.isNotEmpty() == true) {
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(text = error, textAlign = TextAlign.Center, color = Color.Red)
             }
             Spacer(modifier = Modifier.height(32.dp))
 
