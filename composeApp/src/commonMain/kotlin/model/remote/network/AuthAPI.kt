@@ -1,15 +1,14 @@
 package model.remote.network
 
-import io.ktor.client.request.get
+import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import model.remote.data.AuthRequest
-import model.remote.network.ProvideClient.client
 
-class AuthAPI {
+class AuthAPI(private val client: HttpClient) {
 
     suspend fun signIn(authRequest: AuthRequest): HttpResponse {
         return client.post("$BASE_URL/signin") {

@@ -1,5 +1,4 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -9,22 +8,6 @@ plugins {
 }
 
 kotlin {
-    js {
-        moduleName = "composeApp"
-        browser {
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-    }
-    
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -77,17 +60,16 @@ kotlin {
             implementation(libs.ktor.content.negotiation)
             implementation(libs.serialization.json)
             implementation(libs.content.negotiation)
+            implementation(libs.androidx.datastore.preferences)
+            implementation(libs.androidx.datastore.core)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(libs.desktop.ktor.client)
         }
 
         iosMain.dependencies {
             implementation(libs.ios.ktor.client)
-        }
-
-        jsMain.dependencies {
-            implementation(libs.js.ktor.client)
         }
     }
 }
@@ -140,8 +122,4 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
-}
-
-compose.experimental {
-    web.application {}
 }

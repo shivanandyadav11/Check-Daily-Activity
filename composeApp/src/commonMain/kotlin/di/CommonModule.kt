@@ -8,4 +8,5 @@ import model.remote.network.AuthAPI
 val commonModule = module {
     singleOf(::AuthAPI)
     factory { AuthRepository(get()) }
+    factory { AuthAPI(get()) }
 }
