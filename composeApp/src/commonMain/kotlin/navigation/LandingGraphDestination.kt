@@ -17,6 +17,9 @@ fun NavGraphBuilder.landingGraphDestination(
             {
                 navHostController.navigate(NavigationDestination.SignUpDestination.route)
             },
+            userIsAlreadyAuthenticated = {
+                navHostController.navigate(NavigationDestination.HomeDestination.route)
+            }
         )
     }
 }
