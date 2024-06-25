@@ -31,6 +31,7 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,10 +44,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun HomeContent() {
+fun HomeContent(name: State<String?>) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-            GreetingSection()
+            GreetingSection(name)
             Spacer(modifier = Modifier.height(16.dp))
             TaskOverviewSection()
             Spacer(modifier = Modifier.height(40.dp))
@@ -57,10 +58,10 @@ fun HomeContent() {
 }
 
 @Composable
-fun GreetingSection() {
+fun GreetingSection(name: State<String?>) {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
         Column {
-            Text("Hi, Steven", fontWeight = FontWeight.Bold, fontSize = 32.sp)
+            Text("Hi, ${name.value}", fontWeight = FontWeight.Bold, fontSize = 32.sp)
             Spacer(modifier = Modifier.height(8.dp))
             Text("Let's make this day productive")
         }

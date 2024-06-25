@@ -2,12 +2,14 @@ package ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import db.UserEntity
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.local.repo.SaveUserData
@@ -20,14 +22,17 @@ class AuthViewModel(
     private val saveUserData: SaveUserData
 ) : ViewModel() {
 
-    private val _userName: MutableStateFlow<String> = MutableStateFlow("")
-    val userEmail: StateFlow<String> get() = _userName
+    private val _userEmail: MutableStateFlow<String> = MutableStateFlow("")
+    val userEmail: StateFlow<String> get() = _userEmail
 
     private val _authState: MutableStateFlow<AuthState> = MutableStateFlow(AuthState.NoState)
     val authState: StateFlow<AuthState> get() = _authState
 
     private val _userToken: MutableStateFlow<UserState> = MutableStateFlow(UserState.NoState)
     val userToken: StateFlow<UserState> get() = _userToken
+
+    private val _name: MutableStateFlow<String?> = MutableStateFlow(null)
+    val name: StateFlow<String?> get() = _name
 
     fun signIn(name: String?, email: String?, password: String?) =
         viewModelScope.launch(Dispatchers.Default) {
@@ -44,6 +49,11 @@ class AuthViewModel(
             }.onSuccess {
                 _authState.emit(AuthState.Success(it))
                 it.token?.let { token -> saveUserData.saveUserDate(token) }
+                saveUserData.saveUserInfo(UserEntity(
+                    name = it.name.orEmpty(),
+                    email = it.email.orEmpty(),
+                    userId = it.userName.orEmpty()
+                ))
             }.onFailure {
                 _authState.emit(AuthState.Failure)
             }.getOrElse {
@@ -52,7 +62,7 @@ class AuthViewModel(
         }
 
     internal fun setUserEmail(email: String) {
-        _userName.value = email
+        _userEmail.value = email
     }
 
     internal fun userToken() = viewModelScope.launch(Dispatchers.IO) {
@@ -63,6 +73,14 @@ class AuthViewModel(
                 } else {
                     UserState.LogOut
                 }
+            )
+        }
+    }
+
+    internal fun getUserName() = viewModelScope.launch(Dispatchers.IO) {
+        saveUserData.getUserInfo().collectLatest { value ->
+            _name.emit(
+                value.name
             )
         }
     }

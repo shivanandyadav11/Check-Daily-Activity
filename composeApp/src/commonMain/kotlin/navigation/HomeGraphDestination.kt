@@ -10,7 +10,7 @@ fun NavGraphBuilder.homeGraphDestination(
     navHostController: NavHostController,
 ) {
     composable(NavigationDestination.HomeDestination.route) {
-        //HomeScreen()
-        PersonalContent()
+        HomeScreen()
+        //PersonalContent()
     }
 }

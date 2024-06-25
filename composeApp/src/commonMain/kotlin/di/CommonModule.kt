@@ -1,5 +1,7 @@
 package di
 
+import db.AppDatabase
+import getRoomDatabase
 import model.local.impl.SaveUserDataImpl
 import model.local.repo.SaveUserData
 import model.remote.repo.AuthRepository
@@ -11,5 +13,6 @@ val commonModule = module {
     singleOf(::AuthAPI)
     factory { AuthRepository(get()) }
     factory { AuthAPI(get()) }
-    single<SaveUserData> { SaveUserDataImpl(get()) }
+    single<SaveUserData> { SaveUserDataImpl(get(), get()) }
+    single<AppDatabase> { getRoomDatabase() }
 }
