@@ -7,8 +7,8 @@ import online.nsandroid.check_daily_activity.plugins.configureRouting
 import online.nsandroid.check_daily_activity.plugins.configureSecurity
 import online.nsandroid.check_daily_activity.plugins.configureSerialization
 import online.nsandroid.check_daily_activity.security.hashing.SHA256HashingService
-import online.nsandroid.security.token.JwtTokenService
-import online.nsandroid.security.token.TokenConfig
+import online.nsandroid.check_daily_activity.security.token.JwtTokenService
+import online.nsandroid.check_daily_activity.security.token.TokenConfig
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
 

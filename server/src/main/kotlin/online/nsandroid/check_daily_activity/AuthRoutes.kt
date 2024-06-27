@@ -66,7 +66,9 @@ fun Route.signUp(
 
         call.respond(
             status = HttpStatusCode.OK, message = AuthResponse(
-                token = token
+                token = token,
+                userName = user.id.toString(),
+                email = user.email
             )
         )
     }
@@ -118,7 +120,10 @@ fun Route.signIn(
 
         call.respond(
             status = HttpStatusCode.OK, message = AuthResponse(
-                token = token
+                token = token,
+                userName = user.id.toString(),
+                email = user.email,
+                name = user.name,
             )
         )
     }

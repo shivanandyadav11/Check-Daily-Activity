@@ -1,25 +1,14 @@
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrainsCompose)
+    //Room
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser {
-            commonWebpackConfig {
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
-                    }
-                }
-            }
-        }
-    }
     
     androidTarget {
         compilations.all {
@@ -34,10 +23,27 @@ kotlin {
     iosSimulatorArm64()
     
     jvm()
+
+    sourceSets.all {
+        languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+    }
     
     sourceSets {
         commonMain.dependencies {
-            // put your Multiplatform dependencies here
+            implementation(libs.androidx.datastore.preferences)
+            implementation(libs.androidx.datastore.core)
+            implementation(compose.runtime)
+
+            //Room
+            api(libs.room.runtime)
+            implementation(libs.sqlite.bundled)
+        }
+        sourceSets.commonMain {
+            kotlin.srcDir("build/generated/ksp/metadata")
+        }
+
+        androidMain.dependencies {
+            implementation(libs.room.runtime.android)
         }
     }
 }
@@ -51,5 +57,20 @@ android {
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
+    }
+}
+
+dependencies {
+    // Room
+    add("kspCommonMainMetadata", libs.room.compiler)
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata" ) {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }

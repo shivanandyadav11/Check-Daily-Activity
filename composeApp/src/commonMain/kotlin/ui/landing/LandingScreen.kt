@@ -1,24 +1,31 @@
 package ui.landing
 
 import androidx.compose.runtime.Composable
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import navigation.LoginDestination
-import navigation.SignUpDestination
+import androidx.compose.runtime.collectAsState
+import org.koin.compose.koinInject
+import ui.viewmodel.AuthViewModel
+import ui.viewmodel.UserState
 
 @Composable
 fun LandingScreen(
     phone: Boolean = true,
+    onLogInClick: () -> Unit,
+    onSignUpClick: () -> Unit,
+    userIsAlreadyAuthenticated: () -> Unit,
 ) {
-    val navigator: Navigator = LocalNavigator.currentOrThrow
-    LandingContent(
-        phone = phone,
-        onLogInClick = {
-            navigator.push(LoginDestination(phone = phone))
-        },
-        onSignUpClick = {
-            navigator.push(SignUpDestination(phone = phone))
-        }
-    )
+    val viewModel: AuthViewModel = koinInject<AuthViewModel>()
+    viewModel.userToken()
+    val token = viewModel.userToken.collectAsState()
+
+    when(token.value) {
+         is UserState.LogOut -> {
+             LandingContent(
+                 phone = phone,
+                 onLogInClick = onLogInClick,
+                 onSignUpClick = onSignUpClick,
+             )
+         }
+        is UserState.LoggedIn -> userIsAlreadyAuthenticated()
+        is UserState.NoState -> Unit
+    }
 }

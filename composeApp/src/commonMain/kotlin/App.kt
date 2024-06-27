@@ -1,16 +1,18 @@
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.resources.ExperimentalResourceApi
+import androidx.navigation.compose.rememberNavController
+import navigation.ApplicationNavHost
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import cafe.adriel.voyager.navigator.Navigator
-import navigation.LandingDestination
-import ui.landing.LandingScreen
+import org.koin.compose.KoinContext
+import org.koin.core.Koin
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 @Preview
 fun App(phone: Boolean = true) {
     MaterialTheme {
-        Navigator(screen = LandingDestination(phone))
+        KoinContext {
+            val navController = rememberNavController()
+            ApplicationNavHost(navController)
+        }
     }
 }

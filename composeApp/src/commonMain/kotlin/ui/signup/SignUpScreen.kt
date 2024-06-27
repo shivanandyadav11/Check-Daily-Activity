@@ -1,25 +1,20 @@
 package ui.signup
 
 import androidx.compose.runtime.Composable
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import navigation.LoginDestination
 
 @Composable
 fun SignUpScreen(
     phone: Boolean = true,
+    onCreateButtonClick: (String, String, String) -> Unit,
+    onLoginTextClicked: () -> Unit,
 ) {
-    val navigator: Navigator = LocalNavigator.currentOrThrow
     SignUpContent(
         phone = phone,
-        onCreateButtonClick = {
-            userNamme, mail, password -> {
-
-        }
+        onCreateButtonClick = { userName, email, password ->
+            run {
+                onCreateButtonClick(userName, email, password)
+            }
         },
-        onLoginTextClicked = {
-            navigator.push(LoginDestination(phone = phone))
-        }
+        onLoginTextClicked = onLoginTextClicked,
     )
 }
