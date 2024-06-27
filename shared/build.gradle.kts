@@ -1,8 +1,11 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrainsCompose)
+    //Room
+    alias(libs.plugins.ksp)
     alias(libs.plugins.room)
-    id("com.google.devtools.ksp") version "1.9.23-1.0.19"
 }
 
 kotlin {
@@ -29,11 +32,18 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.androidx.datastore.preferences)
             implementation(libs.androidx.datastore.core)
+            implementation(compose.runtime)
 
-            // Room Database
+            //Room
             api(libs.room.runtime)
             implementation(libs.sqlite.bundled)
-            implementation(libs.sqlite)
+        }
+        sourceSets.commonMain {
+            kotlin.srcDir("build/generated/ksp/metadata")
+        }
+
+        androidMain.dependencies {
+            implementation(libs.room.runtime.android)
         }
     }
 }
@@ -51,13 +61,16 @@ android {
 }
 
 dependencies {
-    add("kspAndroid", libs.room.compiler)
-    add("kspIosSimulatorArm64", libs.room.compiler)
-    add("kspIosX64", libs.room.compiler)
-    add("kspIosArm64", libs.room.compiler)
-    add("kspJvm", libs.room.compiler)
+    // Room
+    add("kspCommonMainMetadata", libs.room.compiler)
 }
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata" ) {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
 }

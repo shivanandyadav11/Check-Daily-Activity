@@ -48,7 +48,7 @@ class AuthViewModel(
                 Json.decodeFromString(result) as AuthToken
             }.onSuccess {
                 _authState.emit(AuthState.Success(it))
-                it.token?.let { token -> saveUserData.saveUserDate(token) }
+                it.token?.let { token -> saveUserData.saveUserData(token) }
                 saveUserData.saveUserInfo(UserEntity(
                     name = it.name.orEmpty(),
                     email = it.email.orEmpty(),
@@ -79,8 +79,11 @@ class AuthViewModel(
 
     internal fun getUserName() = viewModelScope.launch(Dispatchers.IO) {
         saveUserData.getUserInfo().collectLatest { value ->
+            if (value == null) {
+                saveUserData.saveUserData("")
+            }
             _name.emit(
-                value.name
+                value?.name.orEmpty()
             )
         }
     }

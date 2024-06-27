@@ -1,6 +1,7 @@
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import db.AppDatabase
+import db.instantiateImpl
 import platform.Foundation.NSHomeDirectory
 
 actual fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {

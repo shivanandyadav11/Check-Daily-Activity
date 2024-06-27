@@ -19,7 +19,7 @@ class SaveUserDataImpl(private val dataStore: DataStore<Preferences>, private va
         database.getDao()
     }
 
-    override suspend fun saveUserDate(string: String) {
+    override suspend fun saveUserData(string: String) {
         dataStore.edit { preferences ->
             preferences[AUTH_TOKEN_KEY] = string  }
     }
@@ -31,7 +31,7 @@ class SaveUserDataImpl(private val dataStore: DataStore<Preferences>, private va
         dao.insert(userEntity)
     }
 
-    override suspend fun getUserInfo(): Flow<UserEntity> {
+    override suspend fun getUserInfo(): Flow<UserEntity?> {
         return dao.getUser()
     }
 }
