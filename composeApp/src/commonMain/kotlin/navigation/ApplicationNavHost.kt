@@ -24,5 +24,8 @@ fun ApplicationNavHost(
         homeGraphDestination(
             navHostController = navController,
         )
+        addGraphDestination(
+            navHostController = navController,
+        )
     }
 }

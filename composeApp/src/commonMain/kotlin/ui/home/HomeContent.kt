@@ -42,9 +42,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ui.action.ActionHandler
 
 @Composable
-fun HomeContent(name: State<String?>) {
+fun HomeContent(name: State<String?>, actionHandler: ActionHandler) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
             GreetingSection(name)
@@ -53,7 +54,7 @@ fun HomeContent(name: State<String?>) {
             Spacer(modifier = Modifier.height(40.dp))
             TodayTasksSection()
         }
-        BottomNavigationBar(modifier = Modifier.align(Alignment.BottomCenter))
+        BottomNavigationBar(modifier = Modifier.align(Alignment.BottomCenter), actionHandler)
     }
 }
 
@@ -210,7 +211,7 @@ fun TodayTaskItem(taskName: String, time: String, tags: List<String>) {
 }
 
 @Composable
-fun BottomNavigationBar(modifier: Modifier = Modifier) {
+fun BottomNavigationBar(modifier: Modifier = Modifier, actionHandler: ActionHandler) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -242,7 +243,7 @@ fun BottomNavigationBar(modifier: Modifier = Modifier) {
                     Icon(Icons.Default.Search, contentDescription = "Search")
                 }
                 FloatingActionButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { actionHandler.onAddButtonClick.invoke() },
                     shape = CircleShape,
                     backgroundColor = Color(0xFF5B67CA),
                     contentColor = Color.White,
