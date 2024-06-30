@@ -37,6 +37,8 @@ kotlin {
             //Room
             api(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            api(libs.kotlinx.datetime)
         }
         sourceSets.commonMain {
             kotlin.srcDir("build/generated/ksp/metadata")
