@@ -1,6 +1,6 @@
 package model.local.repo
 
-import db.UserEntity
+import db.entity.UserEntity
 import kotlinx.coroutines.flow.Flow
 
 interface SaveUserData {

@@ -38,7 +38,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import db.NewTask
+import db.entity.NewTask
 import theme.Colors.floatingButtonBackgroundColor
 import theme.randomColor
 import ui.widgets.CustomDatePickerDialog
@@ -190,10 +190,10 @@ fun AddContent(onCreateClick: (NewTask) -> Unit) {
                         NewTask(
                             title = title,
                             date = date,
-                            time = "$startTime::$endTime",
+                            time = "$startTime - $endTime",
                             description = description,
                             type = selectedType.toString(),
-                            tags= tags.getOrNull(0)
+                            tags= tags,
                         )
                     )
                 },

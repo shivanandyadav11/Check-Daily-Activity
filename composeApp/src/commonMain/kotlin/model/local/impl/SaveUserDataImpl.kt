@@ -5,8 +5,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import db.AppDatabase
-import db.UserDao
-import db.UserEntity
+import db.dao.UserDao
+import db.entity.UserEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import model.local.repo.SaveUserData

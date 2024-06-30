@@ -2,7 +2,7 @@ package ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import db.UserEntity
+import db.entity.UserEntity
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -49,11 +49,13 @@ class AuthViewModel(
             }.onSuccess {
                 _authState.emit(AuthState.Success(it))
                 it.token?.let { token -> saveUserData.saveUserData(token) }
-                saveUserData.saveUserInfo(UserEntity(
+                saveUserData.saveUserInfo(
+                    UserEntity(
                     name = it.name.orEmpty(),
                     email = it.email.orEmpty(),
                     userId = it.userName.orEmpty()
-                ))
+                )
+                )
             }.onFailure {
                 _authState.emit(AuthState.Failure)
             }.getOrElse {

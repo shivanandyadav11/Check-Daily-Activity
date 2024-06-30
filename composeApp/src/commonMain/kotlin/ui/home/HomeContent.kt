@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomAppBar
@@ -42,17 +44,22 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import db.entity.NewTask
 import ui.action.ActionHandler
 
 @Composable
-fun HomeContent(name: State<String?>, actionHandler: ActionHandler) {
+fun HomeContent(
+    name: State<String?>,
+    todayTasks: State<List<NewTask>?>,
+    actionHandler: ActionHandler
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
             GreetingSection(name)
             Spacer(modifier = Modifier.height(16.dp))
             TaskOverviewSection()
             Spacer(modifier = Modifier.height(40.dp))
-            TodayTasksSection()
+            TodayTasksSection(todayTasks = todayTasks.value)
         }
         BottomNavigationBar(modifier = Modifier.align(Alignment.BottomCenter), actionHandler)
     }
@@ -167,7 +174,7 @@ fun TaskOverviewCard(
 }
 
 @Composable
-fun TodayTasksSection() {
+fun TodayTasksSection(todayTasks: List<NewTask>?) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -177,9 +184,14 @@ fun TodayTasksSection() {
         Text("View all", color = Color(0xFF5B67CA))
     }
     Spacer(modifier = Modifier.height(8.dp))
-    TodayTaskItem("Cleaning Clothes", "07:00 - 07:15", listOf("Urgent", "Home"))
-    Spacer(modifier = Modifier.height(8.dp))
-    TodayTaskItem("Cleaning Clothes", "07:00 - 07:15", listOf("Urgent", "Home"))
+    LazyColumn {
+        todayTasks?.let {
+            items(todayTasks) { task ->
+                TodayTaskItem(taskName = task.title.orEmpty(), time = task.time.orEmpty(), tags = task.tags ?: emptyList())
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+        }
+    }
     Spacer(modifier = Modifier.height(16.dp))
 }
 

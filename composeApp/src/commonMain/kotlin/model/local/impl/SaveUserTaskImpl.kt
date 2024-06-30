@@ -1,10 +1,9 @@
 package model.local.impl
 
 import db.AppDatabase
-import db.NewTask
-import db.TaskDao
-import db.UserDao
-import model.local.repo.SaveUserData
+import db.entity.NewTask
+import db.dao.TaskDao
+import kotlinx.coroutines.flow.Flow
 import model.local.repo.SaveUserTask
 
 class SaveUserTaskImpl( private val database: AppDatabase): SaveUserTask {
@@ -15,5 +14,9 @@ class SaveUserTaskImpl( private val database: AppDatabase): SaveUserTask {
 
     override suspend fun saveUserTask(userTask: NewTask) {
         dao.insert(userTask)
+    }
+
+    override suspend fun getUserAllTask(): Flow<List<NewTask>?> {
+        return dao.getUserAllTask()
     }
 }

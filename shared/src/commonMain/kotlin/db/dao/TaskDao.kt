@@ -1,17 +1,18 @@
-package db
+package db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import db.entity.NewTask
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface UserDao {
+interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(item: UserEntity)
+    suspend fun insert(newTask: NewTask)
 
-    @Query("SELECT * FROM UserEntity")
-    fun getUser(): Flow<UserEntity?>
+    @Query("SELECT * FROM NewTask")
+    fun getUserAllTask(): Flow<List<NewTask>?>
 }

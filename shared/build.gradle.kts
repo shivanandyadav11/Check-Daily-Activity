@@ -39,6 +39,7 @@ kotlin {
             implementation(libs.sqlite.bundled)
 
             api(libs.kotlinx.datetime)
+            implementation(libs.serialization.json)
         }
         sourceSets.commonMain {
             kotlin.srcDir("build/generated/ksp/metadata")

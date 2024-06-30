@@ -1,4 +1,4 @@
-package db
+package db.entity
 
 import TaskType
 import androidx.room.Entity
@@ -12,5 +12,5 @@ data class NewTask(
     val time: String? = null,
     val description: String? = null,
     val type: String? = "Personal",
-    val tags: String? = null
+    val tags: List<String>? = null
 )
