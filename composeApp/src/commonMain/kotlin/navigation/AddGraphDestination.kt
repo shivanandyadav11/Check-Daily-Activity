@@ -9,6 +9,10 @@ fun NavGraphBuilder.addGraphDestination(
     navHostController: NavHostController,
 ) {
     composable(NavigationDestination.AddDestination.route) {
-        AddScreen()
+        AddScreen(
+            goBackToHome = {
+                navHostController.navigate(NavigationDestination.HomeDestination.route)
+            }
+        )
     }
 }
