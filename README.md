@@ -26,21 +26,58 @@ If you face any issues, please report them on [GitHub](https://github.com/JetBra
 
 You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
 
-# My Application
+# Design
 
-Welcome to the landing page of My Application.
+[Check the design on Figma](https://www.figma.com/design/wSyg60Tkg5DQzyPPDNHTV7/dailoz-app-vektora-studio?node-id=0-1&t=lF2cXQVCj9bOOfmy-0)
+
+
+# Check Daily Activity App (Android, iOS, and Desktop)
+
+## Features
+
+- **UI**: Common Jetpack Compose
+- **Navigation**: Compose Navigation
+- **Dependency Injection**: Koin
+- **Database**: Room Database
+- **Date Handling**: Platform-specific library
+- **Shared ViewModel**: SharedViewModel across all platforms
+- **Background Work**: Coroutines
+- ** Work in Progress
+
 
 ## Screenshots
 
-| Android | iOS | Desktop |
+# Android
+
+| Landing | Sign In | Sign Up | Error on Sign In|
+|:---:|:---:|:---:|:---:|
+|<img width="350" alt="android_landing_page" src="https://github.com/user-attachments/assets/9596102e-d2bc-49db-8404-ab61eeb79f61">|<img width="350" alt="signIN" src="https://github.com/user-attachments/assets/51106a0d-93f6-405e-8a37-fb3b15dc39ad">|<img width="350" alt="signUP" src="https://github.com/user-attachments/assets/39275ab5-24fc-4386-9cc8-4ce9257b0855">|<img width="350" alt="error" src="https://github.com/user-attachments/assets/287aff26-ac4e-4b9a-9e69-623144c8f789">|
+
+| Loading | Home | Add Task |
 |:---:|:---:|:---:|
-|<img width="398" alt="android_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/d10d82f7-9c03-4a30-95ff-20bd2cbb7943">|<img width="419" alt="iOS_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/d40f1471-22cf-4186-a9ad-7799526390e0">|<img width="627" alt="desktop_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/65a4b707-b4aa-4696-8343-639170f3b2d0">|
+|<img width="350" alt="loading" src="https://github.com/user-attachments/assets/489209aa-2bdf-49b4-963d-1cc950ff469b">|<img width="350" alt="home" src="https://github.com/user-attachments/assets/7cbfb5c1-e05e-4af8-8248-1f47caa295ac">|<img width="350" alt="add_task" src="https://github.com/user-attachments/assets/9d50c48d-062c-4053-991d-eb98b7f7d8e6">|
 
 
-| Web |
-|:---:|
-|<img width="1728" alt="web_landing_page" src="https://github.com/shivanandyadav11/Check-Daily-Activity/assets/26367466/5329365d-1beb-43aa-8846-422b95dbf3bf">|
+# iOS
 
+| Landing | Sign In | Sign Up | Error on Sign In|
+|:---:|:---:|:---:|:---:|
+|<img width="350" alt="ios_landing_page" src="https://github.com/user-attachments/assets/557b92bc-77d0-4b44-8cb6-ae3fa13b2178">|<img width="350" alt="signIN" src="https://github.com/user-attachments/assets/dbbda03f-de9e-4197-84b0-3f7b8a94595e">|<img width="350" alt="signUP" src="https://github.com/user-attachments/assets/6d697cc6-7c2f-48f2-89b1-73a19c4533f8">|<img width="350" alt="error" src="https://github.com/user-attachments/assets/f20c46ce-001f-4bec-926a-7f523a69dec1">|
+
+| Loading | Home | Add Task |
+|:---:|:---:|:---:|
+|<img width="350" alt="loading" src="https://github.com/user-attachments/assets/026e224d-96cc-4f77-87b7-c95fa13108a9">|<img width="350" alt="home" src="https://github.com/user-attachments/assets/0caaaa12-9135-43be-9d74-1b13256374c4">|<img width="350" alt="add_task" src="https://github.com/user-attachments/assets/83a5d51d-2b1b-4ec5-9ad8-9c7c26293ee9">|
+
+
+# Desktop
+
+| Landing | Sign In | Sign Up | Error on Sign In|
+|:---:|:---:|:---:|:---:|
+|<img width="350" alt="ios_landing_page" src="https://github.com/user-attachments/assets/b66d2c7c-5607-4014-9e95-693704ca42ff">|<img width="350" alt="signIN" src="https://github.com/user-attachments/assets/f0689e79-24e7-465e-b7df-2d7958a1a0d0">|<img width="350" alt="signUP" src="https://github.com/user-attachments/assets/3360d129-ab24-403f-a8c7-33a5070e0eb6">|<img width="350" alt="error" src="https://github.com/user-attachments/assets/476b5baa-e8c8-4132-9f49-fa3a417664aa">|
+
+| Loading | Home | Add Task |
+|:---:|:---:|:---:|
+|<img width="350" alt="loading" src="https://github.com/user-attachments/assets/1757ce80-1aeb-43c9-8ee3-845b441c6bd4">|<img width="350" alt="home" src="https://github.com/user-attachments/assets/8db5e6c1-80a0-47e5-909d-1efc44cf35df">|<img width="350" alt="add_task" src="https://github.com/user-attachments/assets/7eabce5a-ae9e-4250-92e3-4bde063a80f3">|
 
 ---
 
