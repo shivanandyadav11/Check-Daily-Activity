@@ -22,7 +22,7 @@ class TaskViewModel(
         saveUserTask.saveUserTask(newTask)
     }
 
-    fun getUserDate() = viewModelScope.launch {
+    fun getUserDate() = viewModelScope.launch(Dispatchers.IO) {
         saveUserTask.getUserAllTask().collectLatest { listOfNewTasks ->
             _todayTask.emit(listOfNewTasks)
         }
