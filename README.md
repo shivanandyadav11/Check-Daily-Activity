@@ -49,7 +49,7 @@ You can open the web application by running the `:composeApp:wasmJsBrowserDevelo
 ## Flow Recording
 |Check Daily Update|
 |:---:|
-|<img width="350" alt="flow" src="https://github.com/user-attachments/assets/42fbf05e-172b-496c-930c-d25054a0da46">|
+|<video src="https://github.com/user-attachments/assets/42fbf05e-172b-496c-930c-d25054a0da46" controls="controls" style="max-width: 100%;"></video>|
 
 # Android Screenshots
 
